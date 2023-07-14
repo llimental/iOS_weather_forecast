@@ -48,15 +48,18 @@ extension ViewController: UICollectionViewDataSource {
         }
 
         header.weatherImage.image = weatherIcon
-
-        header.locationLabel.text = locationManager.address
+        header.locationLabel.text = locationManager.address == "" ? "-" : locationManager.address
 
         if let tempMin = weather?.main.tempMin, let tempMax = weather?.main.tempMax {
             header.tempMinAndMaxLabel.text = "최저 \(String(format: "%.1f", tempMin))° 최대 \(String(format: "%.1f", tempMax))°"
+        } else {
+            header.tempMinAndMaxLabel.text = "-"
         }
 
         if let temp = weather?.main.temp {
             header.tempLabel.text = "\(String(format: "%.1f", temp))°"
+        } else {
+            header.tempLabel.text = "-"
         }
 
         return header
