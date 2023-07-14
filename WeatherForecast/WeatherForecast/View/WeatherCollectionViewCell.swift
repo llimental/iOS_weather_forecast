@@ -50,7 +50,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             timeLabel.widthAnchor.constraint(equalToConstant: self.frame.width * 0.7),
             timeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
@@ -62,7 +62,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             
             tempImage.topAnchor.constraint(equalTo: self.topAnchor),
             tempImage.leadingAnchor.constraint(equalTo: temperatureLabel.trailingAnchor),
-            tempImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            tempImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             tempImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             tempImage.widthAnchor.constraint(equalToConstant: self.frame.width * 0.1),
             tempImage.centerYAnchor.constraint(equalTo: self.centerYAnchor)
