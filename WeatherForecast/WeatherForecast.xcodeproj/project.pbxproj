@@ -17,6 +17,9 @@
 		C79C8D1625ADDDF400EEE3F1 /* WeatherForecastUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79C8D1525ADDDF400EEE3F1 /* WeatherForecastUITests.swift */; };
 		D99261F32A619033004D0EC6 /* RequestAndResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99261F22A619033004D0EC6 /* RequestAndResponse.swift */; };
 		D99261F52A619096004D0EC6 /* OpenWeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99261F42A619096004D0EC6 /* OpenWeatherAPI.swift */; };
+		D99261F72A619E46004D0EC6 /* WeatherEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99261F62A619E46004D0EC6 /* WeatherEndPoint.swift */; };
+		D99261F92A619EF1004D0EC6 /* ForecastEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99261F82A619EF1004D0EC6 /* ForecastEndPoint.swift */; };
+		D99261FB2A619F46004D0EC6 /* GeocodingEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99261FA2A619F46004D0EC6 /* GeocodingEndPoint.swift */; };
 		D99261FD2A61A01A004D0EC6 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99261FC2A61A01A004D0EC6 /* Geocoding.swift */; };
 		D9A6D84229C1ABD9003139A8 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6D84129C1ABD9003139A8 /* Weather.swift */; };
 		D9B4602C29DFF243007C3694 /* WeatherCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B4602B29DFF243007C3694 /* WeatherCollectionViewHeader.swift */; };
@@ -68,6 +71,9 @@
 		C79C8D1725ADDDF400EEE3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D99261F22A619033004D0EC6 /* RequestAndResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAndResponse.swift; sourceTree = "<group>"; };
 		D99261F42A619096004D0EC6 /* OpenWeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherAPI.swift; sourceTree = "<group>"; };
+		D99261F62A619E46004D0EC6 /* WeatherEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEndPoint.swift; sourceTree = "<group>"; };
+		D99261F82A619EF1004D0EC6 /* ForecastEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastEndPoint.swift; sourceTree = "<group>"; };
+		D99261FA2A619F46004D0EC6 /* GeocodingEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingEndPoint.swift; sourceTree = "<group>"; };
 		D99261FC2A61A01A004D0EC6 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		D9A6D84129C1ABD9003139A8 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		D9B4602B29DFF243007C3694 /* WeatherCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewHeader.swift; sourceTree = "<group>"; };
@@ -166,6 +172,16 @@
 			path = WeatherForecastUITests;
 			sourceTree = "<group>";
 		};
+		D99261EF2A618FAF004D0EC6 /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				D99261F62A619E46004D0EC6 /* WeatherEndPoint.swift */,
+				D99261F82A619EF1004D0EC6 /* ForecastEndPoint.swift */,
+				D99261FA2A619F46004D0EC6 /* GeocodingEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
 		D99261F12A618FDD004D0EC6 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +248,7 @@
 			children = (
 				D99261F12A618FDD004D0EC6 /* API */,
 				E77D5DBA29C950CC001F02A7 /* Protocol */,
+				D99261EF2A618FAF004D0EC6 /* EndPoint */,
 				D9FDB69B29C991A0005D9D76 /* NetworkManager.swift */,
 				E72CF6B829D137DC00143B84 /* Error */,
 			);
@@ -403,14 +420,17 @@
 				C79C8CF825ADDDF200EEE3F1 /* ViewController.swift in Sources */,
 				C79C8CF425ADDDF200EEE3F1 /* AppDelegate.swift in Sources */,
 				D9B4602C29DFF243007C3694 /* WeatherCollectionViewHeader.swift in Sources */,
+				D99261FB2A619F46004D0EC6 /* GeocodingEndPoint.swift in Sources */,
 				D9F4F59B29CD91E200D7BE8B /* LocationManager.swift in Sources */,
 				D9B4603029E01041007C3694 /* LocationManagerDelegate.swift in Sources */,
 				E77D5DD429C976E6001F02A7 /* OpenWeatherURLProtocol.swift in Sources */,
 				C79C8CF625ADDDF200EEE3F1 /* SceneDelegate.swift in Sources */,
+				D99261F92A619EF1004D0EC6 /* ForecastEndPoint.swift in Sources */,
 				E7D8D8E929DD670200E23C20 /* ViewController+Extensions.swift in Sources */,
 				D9A6D84229C1ABD9003139A8 /* Weather.swift in Sources */,
 				D99261F52A619096004D0EC6 /* OpenWeatherAPI.swift in Sources */,
 				E7D8D8EB29DD678000E23C20 /* WeatherCollectionView.swift in Sources */,
+				D99261F72A619E46004D0EC6 /* WeatherEndPoint.swift in Sources */,
 				E770FBBE29C1AF4200977D51 /* Forecast.swift in Sources */,
 				D99261F32A619033004D0EC6 /* RequestAndResponse.swift in Sources */,
 				E72CF6BC29D1584600143B84 /* LocationError.swift in Sources */,
