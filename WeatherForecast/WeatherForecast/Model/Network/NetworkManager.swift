@@ -37,6 +37,16 @@ final class NetworkManager {
         return forecast
     }
 
+    func callGeocodingAPI<D: Decodable, R: RequestAndResponse>(with endPoint: R) async throws -> D where R.Response == D {
+        let geocodingURLRequest = try endPoint.makeURLRequest()
+
+        let (data, _) = try await session.data(for: geocodingURLRequest)
+        let geocoding = try JSONDecoder().decode(D.self, from: data)
+
+        print("[NetworkManager](fetched)geocoding")
+        return geocoding
+    }
+
     func callWeatherIconAPI(weatherStatus: String) async throws -> UIImage? {
         let weatherIconURL = try getURL(string: "https://openweathermap.org/img/wn/\(weatherStatus)@2x.png")
         var weatherIconURLRequest = URLRequest(url: weatherIconURL)
