@@ -23,6 +23,9 @@ class ViewController: UIViewController {
     
     var forecastIcons: [String: UIImage]? {
         didSet {
+            if collectionView.refreshControl?.isRefreshing == true {
+                collectionView.refreshControl?.endRefreshing()
+            }
             collectionView.reloadData()
         }
     }
@@ -76,7 +79,6 @@ class ViewController: UIViewController {
     
     @objc func refreshData() {
         locationManager.startUpdatingLocation()
-        collectionView.refreshControl?.endRefreshing()
     }
 
     private func collectionViewConfiguration() {
