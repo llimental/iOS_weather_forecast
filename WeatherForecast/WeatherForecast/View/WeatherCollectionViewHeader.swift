@@ -18,6 +18,7 @@ class WeatherCollectionViewHeader: UICollectionReusableView {
     var locationLabel = UILabel()
     var tempMinAndMaxLabel = UILabel()
     var tempLabel = UILabel()
+    var settingButton = UIButton()
 
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -26,6 +27,7 @@ class WeatherCollectionViewHeader: UICollectionReusableView {
 
         addSubview(weatherImage)
         addSubview(informationStack)
+        addSubview(settingButton)
 
         informationStack.addArrangedSubview(locationLabel)
         informationStack.addArrangedSubview(tempMinAndMaxLabel)
@@ -57,11 +59,16 @@ class WeatherCollectionViewHeader: UICollectionReusableView {
 
         tempLabel.textColor = .white
         tempLabel.font = UIFont.systemFont(ofSize: 30)
+
+        settingButton.setTitle("위치설정", for: .normal)
+        settingButton.setTitleColor(.white, for: .normal)
+        settingButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
 
     private func configureConstraints() {
         weatherImage.translatesAutoresizingMaskIntoConstraints = false
         informationStack.translatesAutoresizingMaskIntoConstraints = false
+        settingButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             weatherImage.topAnchor.constraint(equalTo: self.topAnchor),
@@ -72,7 +79,12 @@ class WeatherCollectionViewHeader: UICollectionReusableView {
 
             informationStack.topAnchor.constraint(equalTo: self.topAnchor),
             informationStack.leadingAnchor.constraint(equalTo: weatherImage.trailingAnchor),
-            informationStack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            informationStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+
+            settingButton.topAnchor.constraint(equalTo: self.topAnchor),
+            settingButton.leadingAnchor.constraint(equalTo: informationStack.trailingAnchor),
+            settingButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            settingButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2)
         ])
     }
 }
