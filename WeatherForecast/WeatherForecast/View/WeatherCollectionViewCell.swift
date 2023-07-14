@@ -39,6 +39,8 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         
         temperatureLabel.textColor = .white
         temperatureLabel.textAlignment = .center
+
+        tempImage.contentMode = .scaleAspectFit
     }
     
     private func configureConstraint() {

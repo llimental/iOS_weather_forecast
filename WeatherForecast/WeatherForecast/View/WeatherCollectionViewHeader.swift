@@ -38,6 +38,8 @@ class WeatherCollectionViewHeader: UICollectionReusableView {
 
     // MARK: - Private function
     private func configureUI() {
+        weatherImage.contentMode = .scaleAspectFit
+
         locationLabel.textColor = .white
         locationLabel.font = UIFont.systemFont(ofSize: 15)
         
