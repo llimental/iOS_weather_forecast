@@ -36,8 +36,9 @@ enum OpenWeatherAPI {
         case .weather(let lat, let lon), .forecast(let lat, let lon):
             let latitudeParameter = URLQueryItem(name: "lat", value: "\(lat)")
             let longitudeParameter = URLQueryItem(name: "lon", value: "\(lon)")
+            let unitsParameter = URLQueryItem(name: "units", value: "metric")
 
-            queryItems = [latitudeParameter, longitudeParameter, keyParameter]
+            queryItems = [latitudeParameter, longitudeParameter, unitsParameter, keyParameter]
         case .geocoding(let cityName):
             let nameParameter = URLQueryItem(name: "q", value: cityName)
             let limitParameter = URLQueryItem(name: "limit", value: "5")
