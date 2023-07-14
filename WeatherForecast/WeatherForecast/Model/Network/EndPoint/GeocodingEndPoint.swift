@@ -8,7 +8,7 @@
 import Foundation
 
 final class GeocodingEndPoint: RequestAndResponse {
-    typealias Response = Geocoding
+    typealias Response = [Geocoding]
 
     var scheme: String
     var host: String
