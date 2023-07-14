@@ -12,8 +12,8 @@ extension ViewController: LocationManagerDelegate {
     func fetchData() {
         guard let coordinate = locationManager.coordinate else { return }
         Task {
-            weather = try await networkManager.callWeatherAPI(latitude: coordinate.latitude, longitude: coordinate.longitude)
-            forecast = try await networkManager.callForecastAPI(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            weather = try await networkManager.callWeatherAPI(with: WeatherEndPoint(lat: coordinate.latitude, lon: coordinate.longitude))
+            forecast = try await networkManager.callForecastAPI(with: ForecastEndPoint(lat: coordinate.latitude, lon: coordinate.longitude))
 
             guard let weatherIconString = weather?.weather.first?.icon else { return }
             weatherIcon = try await networkManager.callWeatherIconAPI(weatherStatus: weatherIconString)

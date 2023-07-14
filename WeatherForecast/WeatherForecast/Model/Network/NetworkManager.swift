@@ -8,31 +8,31 @@
 import UIKit
 import CoreLocation
 
-final class NetworkManager: OpenWeatherURLProtocol {
+final class NetworkManager {
+
+    private let session: URLSession
+
+    init() {
+        session = URLSession(configuration: .default)
+    }
     
     // MARK: - Public
-    func callWeatherAPI(latitude: Double, longitude: Double) async throws -> Weather? {
-        let weatherURLString = weatherURL(lat: latitude, lon: longitude)
-        let weatherURL = try getURL(string: weatherURLString)
-        var weatherURLRequest = URLRequest(url: weatherURL)
+    func callWeatherAPI<D: Decodable, R: RequestAndResponse>(with endPoint: R) async throws -> D where R.Response == D {
+        let weatherURLRequest = try endPoint.makeURLRequest()
 
-        weatherURLRequest.httpMethod = "GET"
+        let (data, _) = try await session.data(for: weatherURLRequest)
+        let weather: D = try JSONDecoder().decode(D.self, from: data)
 
-        let (data, _) = try await URLSession.shared.data(for: weatherURLRequest)
-        let weather = try JSONDecoder().decode(Weather.self, from: data)
         print("[NetworkManager](fetched)weather")
         return weather
     }
 
-    func callForecastAPI(latitude: Double, longitude: Double) async throws -> Forecast? {
-        let forecastURLString = forecastURL(lat: latitude, lon: longitude)
-        let forecastURL = try getURL(string: forecastURLString)
-        var forecastURLRequest = URLRequest(url: forecastURL)
+    func callForecastAPI<D: Decodable, R: RequestAndResponse>(with endPoint: R) async throws -> D where R.Response == D {
+        let forecastURLRequest = try endPoint.makeURLRequest()
         
-        forecastURLRequest.httpMethod = "GET"
-        
-        let (data, _) = try await URLSession.shared.data(for: forecastURLRequest)
-        let forecast = try JSONDecoder().decode(Forecast.self, from: data)
+        let (data, _) = try await session.data(for: forecastURLRequest)
+        let forecast = try JSONDecoder().decode(D.self, from: data)
+
         print("[NetworkManager](fetched)forecast")
         return forecast
     }
@@ -45,6 +45,7 @@ final class NetworkManager: OpenWeatherURLProtocol {
 
         let (data, _) = try await URLSession.shared.data(for: weatherIconURLRequest)
         let weatherIconImage = UIImage(data: data)
+
         print("[NetworkManager](fetched)WeatherIcon")
         return weatherIconImage
     }
