@@ -15,23 +15,11 @@ class ViewController: UIViewController {
     
     let dateFormatter = DateFormatter()
 
-    var weather: Weather? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var weather: Weather?
 
-    var forecast: Forecast? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var forecast: Forecast?
 
-    var weatherIcon: UIImage? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var weatherIcon: UIImage?
     
     var forecastIcons: [String: UIImage]? {
         didSet {
