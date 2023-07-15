@@ -5,7 +5,7 @@
 
 <!-- [2. 객체의 역할](#-객체의-역할과-책임) -->
 
-[2. 구현 화면](#-구현-화면)
+[2. 구현 화면](#-1차-구현-화면2차-구현-화면)
 
 [3. 학습키워드 및 학습내용](#-학습-키워드-및-학습-내용)
 
@@ -18,7 +18,8 @@
 <br>
 
 ## 💫 Team 💫
-🏃🏻🏃🏻‍♂️💨 **프로젝트 기간:** `23.03.13` ~ `23.04.14`
+🏃🏻🏃🏻‍♂️💨 **1차 프로젝트 기간(짝 프로그래밍):** `23.03.13` ~ `23.04.14` <br><br>
+🏃🏻🏃🏻‍♂️💨 **2차 프로젝트 기간(개인 작업):** `23.07.14` ~ `23.07.15`
 
 |<img src="https://avatars.githubusercontent.com/u/113027391?v=4" width=200>|<img src="https://avatars.githubusercontent.com/u/45708630?v=4" width=200>|
 |:---:|:---:|
@@ -26,8 +27,8 @@
 
 <br>
 
-## 📱 구현 화면
-<img src = "https://user-images.githubusercontent.com/45708630/230910433-6e28a900-243b-48bb-b9a6-b3f415bb2f9c.gif" width = 300>
+## 📱　　　　　 1차 구현 화면　　　　　　　　|　　　　　　　　2차 구현 화면
+<img src = "https://user-images.githubusercontent.com/45708630/230910433-6e28a900-243b-48bb-b9a6-b3f415bb2f9c.gif" width = 40%>　　　　　<img src = "https://github.com/llimental/iOS_weather_forecast/assets/45708630/6b77f70a-67f2-44df-baea-8edb8114d653" width = 40%>
 
 <br>
 
@@ -200,6 +201,11 @@ cell.timeLabel.text = dateFormatter.string(from: conversionTimeDataToDate)
 - 화면 위에서 아래로 끌었다 놓으면 정보 새로고침
 - 🗝️ keyword: CollectionView, Refresh Control, DateFormatter, AutoLayout
 - [STEP 3 PR 🔗](https://github.com/tasty-code/ios-weather-forecast/pull/17)
+
+- ### STEP 4 수동 위치 설정 기능 추가(2차 프로젝트 기간)
+    - 동적 매개변수 대응을 위한 네트워킹 타입 구현
+    - UIAlertController를 통한 필드 입력
+- 🗝️ keyword: UIAlertController, addTarget, session, Reuse, encapsulate
 
 <br>
 
@@ -510,3 +516,17 @@ func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
 > 
 > iOS 앱 사용권한에 대해 알아보면 좋을 것 같습니다! 일반적으로 사용자 위치 권한은 요청할 당시 1번만 팝업이 출력됩니다. 그 이후에는 앱에 설정된 권한에 따라 동작하게 됩니다.
 locationManagerDidChangeAuthorization 메서드의 용도와 authorizationStatus 의 권한 종류들에 대해서 확인해보면 좋을 것 같습니다!
+
+</br>
+
+### 8. LayoutConstraints 문제(2차 프로젝트 기간, 도움준 이: @수박)
+<img width="1182" alt="Pasted Graphic" src="https://github.com/llimental/iOS_weather_forecast/assets/45708630/1f3d295c-6c0c-4c80-9c74-9046995e11b1">
+
+- alertController 자체는 문제가 발생하지 않았으나 textField를 넣어주면 문제 발생
+- 레이아웃 제약을 다르게 줘보고, addTarget을 ViewController, CollectionViewHeader에서 각각 해보는 등의 방법을 시도하였음
+- 문제는 외부 개발자가 접근할 수 없는 _UIAlertControllerTextFieldViewCollectionCell 에서 발생했기에 해결이 어려움
+- log가 찍히는 것 외에 UI를 그리거나 기능상 문제가 없어서 넘어가는 방향 선택
+
+
+
+
