@@ -50,17 +50,9 @@ extension ViewController: UICollectionViewDataSource {
         header.weatherImage.image = weatherIcon
         header.locationLabel.text = locationManager.address == "" ? "-" : locationManager.address
 
-        if let tempMin = weather?.main.tempMin, let tempMax = weather?.main.tempMax {
-            header.tempMinAndMaxLabel.text = "최저 \(String(format: "%.1f", tempMin))° 최대 \(String(format: "%.1f", tempMax))°"
-        } else {
-            header.tempMinAndMaxLabel.text = "-"
-        }
+        header.tempMinAndMaxLabel.text = weather?.main.tempMin != nil && weather?.main.tempMax != nil ? "최저 \(String(format: "%.1f", weather?.main.tempMin ?? 0))° 최대 \(String(format: "%.1f", weather?.main.tempMax ?? 0))°" : "-"
 
-        if let temp = weather?.main.temp {
-            header.tempLabel.text = "\(String(format: "%.1f", temp))°"
-        } else {
-            header.tempLabel.text = "-"
-        }
+        header.tempLabel.text = weather?.main.temp == nil ? "-" : "\(String(format: "%.1f", weather?.main.temp ?? 0))°"
 
         return header
     }
