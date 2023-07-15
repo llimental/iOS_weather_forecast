@@ -21,6 +21,10 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         setUp()
     }
 
+    func setAddress(with currentAddress: String) {
+        address = currentAddress
+    }
+
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
@@ -53,14 +57,15 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
 
     private func reverseGeocodeLocation(_ location: CLLocation) {
         geoCoder.reverseGeocodeLocation(location) { placemarks, error in
-            self.address = ""
+            var reversedAddress = ""
 
             guard let placemark = placemarks?.first else { return }
 
-            if let administrativeArea = placemark.administrativeArea { self.address += administrativeArea }
+            if let administrativeArea = placemark.administrativeArea { reversedAddress += administrativeArea }
 
-            if let locality = placemark.locality { self.address += " \(locality)" }
-            
+            if let locality = placemark.locality { reversedAddress += " \(locality)" }
+
+            self.setAddress(with: reversedAddress)
         }
     }
 }
