@@ -13,7 +13,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private let geoCoder = CLGeocoder()
     private(set) var address = ""
-    private(set) var coordinate: CLLocationCoordinate2D?
 
     weak var delegate: LocationManagerDelegate?
 
@@ -38,8 +37,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
         print("[LocationManager](updated)location")
-        coordinate = location.coordinate
-        delegate?.fetchData()
+        delegate?.fetchData(with: location.coordinate.latitude, and: location.coordinate.longitude)
         reverseGeocodeLocation(location)
     }
 

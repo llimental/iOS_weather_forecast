@@ -8,5 +8,5 @@
 import CoreLocation
 
 protocol LocationManagerDelegate: AnyObject {
-    func fetchData()
+    func fetchData(with lat: Double, and lon: Double)
 }
