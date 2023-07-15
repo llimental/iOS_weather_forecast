@@ -54,7 +54,25 @@ extension ViewController: UICollectionViewDataSource {
 
         header.tempLabel.text = weather?.main.temp == nil ? "-" : "\(String(format: "%.1f", weather?.main.temp ?? 0))°"
 
+        header.settingButton.addTarget(self, action: #selector(settingButtonTapped), for: .touchUpInside)
+
         return header
+    }
+
+    @objc func settingButtonTapped() {
+        let alert = UIAlertController(title: "위치변경", message: "날씨를 확인하고 싶은 도시 이름을 입력해주세요", preferredStyle: .alert)
+
+        alert.addTextField { textField in
+            textField.placeholder = "ex. 서울 or Seoul"
+        }
+        alert.addAction(UIAlertAction(title: "변경".localizedLowercase, style: .default, handler: { action in
+            if let inputText = alert.textFields?.first?.text {
+                print(inputText)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "취소".localizedLowercase, style: .cancel))
+
+        self.present(alert, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
