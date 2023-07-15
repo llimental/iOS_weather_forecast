@@ -66,7 +66,7 @@ extension ViewController: UICollectionViewDataSource {
         }
         alert.addAction(UIAlertAction(title: "변경".localizedLowercase, style: .default, handler: { action in
             if let inputText = alert.textFields?.first?.text {
-                print(inputText)
+                self.getGeocodingData(from: inputText)
             }
         }))
         alert.addAction(UIAlertAction(title: "취소".localizedLowercase, style: .cancel))

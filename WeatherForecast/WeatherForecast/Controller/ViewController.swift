@@ -16,17 +16,24 @@ class ViewController: UIViewController {
     let dateFormatter = DateFormatter()
 
     var weather: Weather?
-
     var forecast: Forecast?
-
     var weatherIcon: UIImage?
-    
     var forecastIcons: [String: UIImage]? {
         didSet {
             if collectionView.refreshControl?.isRefreshing == true {
                 collectionView.refreshControl?.endRefreshing()
             }
             collectionView.reloadData()
+        }
+    }
+
+    // MARK: - Public function
+    func getGeocodingData(from inputText: String) {
+        Task {
+            if let geocoding = try await networkManager.callGeocodingAPI(with: GeocodingEndPoint(cityName: inputText)).first {
+                locationManager.setAddress(with: "\(geocoding.name)(\(geocoding.country))")
+                fetchData(with: geocoding.lat, and: geocoding.lon)
+            }
         }
     }
 
