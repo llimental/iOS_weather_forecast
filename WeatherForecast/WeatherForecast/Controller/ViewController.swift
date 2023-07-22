@@ -59,6 +59,7 @@ class ViewController: UIViewController {
         collectionViewConfiguration()
         
         dateFormatter.dateFormat = "MM/dd(E) HH시"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         
         locationManager.delegate = self
         setUpLocationManager()
