@@ -64,11 +64,13 @@ extension ViewController: UICollectionViewDataSource {
         alert.addTextField { textField in
             textField.placeholder = "ex. 서울 or Seoul"
         }
-        alert.addAction(UIAlertAction(title: "변경".localizedLowercase, style: .default, handler: { action in
+
+        alert.addAction(UIAlertAction(title: "변경".localizedLowercase, style: .default, handler: { [unowned alert, weak self] _ in
             if let inputText = alert.textFields?.first?.text {
-                self.getGeocodingData(from: inputText)
+                self?.getGeocodingData(from: inputText)
             }
         }))
+
         alert.addAction(UIAlertAction(title: "취소".localizedLowercase, style: .cancel))
 
         self.present(alert, animated: true)

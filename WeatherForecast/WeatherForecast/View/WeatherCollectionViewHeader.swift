@@ -60,7 +60,7 @@ class WeatherCollectionViewHeader: UICollectionReusableView {
         tempLabel.textColor = .white
         tempLabel.font = UIFont.systemFont(ofSize: 30)
 
-        settingButton.setTitle("위치설정", for: .normal)
+        settingButton.setTitle("위치변경", for: .normal)
         settingButton.setTitleColor(.white, for: .normal)
         settingButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
