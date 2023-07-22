@@ -33,6 +33,8 @@ class ViewController: UIViewController {
             if let geocoding = try await networkManager.callGeocodingAPI(with: GeocodingEndPoint(cityName: inputText)).first {
                 locationManager.setAddress(with: "\(geocoding.name)(\(geocoding.country))")
                 fetchData(with: geocoding.lat, and: geocoding.lon)
+            } else {
+                print(NetworkError.invalidCityName.errorDescription)
             }
         }
     }

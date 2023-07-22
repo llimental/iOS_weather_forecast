@@ -9,14 +9,16 @@ import Foundation
 
 enum NetworkError: LocalizedError {
     case invalidURL
+    case invalidCityName
     case apiFilePath
     case apiResource
     case apiKey
     case decodeError
     
-    var errorDescription: String? {
+    var errorDescription: String {
         switch self {
         case .invalidURL: return "invalid URL"
+        case .invalidCityName: return "입력한 도시명 에러"
         case .apiKey: return "api key 에러"
         case .apiResource: return "api resource 에러"
         case .apiFilePath: return "api file path 에러"
