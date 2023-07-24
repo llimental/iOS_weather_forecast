@@ -142,6 +142,8 @@
 				E770FBBC29C1AF2B00977D51 /* Model */,
 				E7D8D8EE29DD6B3D00E23C20 /* View */,
 				E7D8D8EF29DD6BEA00E23C20 /* Controller */,
+				D960A75C2A6E4A8100DD999E /* Utilities */,
+				D960A75B2A6E4A4F00DD999E /* ViewModel */,
 				D9CEE41F29C431A80035AA8E /* WeatherInfo.plist */,
 				D9CEE42129C433880035AA8E /* WeatherForecast++Bundle.swift */,
 				C79C8CF925ADDDF200EEE3F1 /* Main.storyboard */,
@@ -168,6 +170,20 @@
 				C79C8D1725ADDDF400EEE3F1 /* Info.plist */,
 			);
 			path = WeatherForecastUITests;
+			sourceTree = "<group>";
+		};
+		D960A75B2A6E4A4F00DD999E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D960A75C2A6E4A8100DD999E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		D99261EF2A618FAF004D0EC6 /* EndPoint */ = {
