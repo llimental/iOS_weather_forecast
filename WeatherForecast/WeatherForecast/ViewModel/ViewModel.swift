@@ -16,6 +16,8 @@ public class ViewModel {
     let tempMinAndMax = Box("-°, -°")
     let temperature = Box("-°")
 
+    weak var delegate: ViewModelDelegate?
+
     func getConvertedDate(of indexPath: IndexPath) -> String {
         if let forecastData = forecast?.list[indexPath.row] {
             let conversionTimeDataToDate = Date(timeIntervalSinceReferenceDate: TimeInterval(forecastData.timeOfData))
