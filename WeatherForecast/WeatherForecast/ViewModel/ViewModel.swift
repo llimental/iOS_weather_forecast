@@ -18,6 +18,19 @@ public class ViewModel: LocationManagerDelegate {
 
     weak var delegate: ViewModelDelegate?
 
+    // MARK: - Public Functions
+    func getGeocodingData(from inputText: String) {
+        Task {
+            if let geocoding = try await networkManager.callGeocodingAPI(with: GeocodingEndPoint(cityName: inputText)).first {
+                fetchData(with: geocoding.lat, and: geocoding.lon)
+            } else {
+                weatherIcon.value = nil
+                forecastIcons.value = nil
+                print(NetworkError.invalidCityName.errorDescription)
+            }
+        }
+    }
+
     func getConvertedDate(of indexPath: IndexPath) -> String {
         if let forecastData = forecast?.list[indexPath.row] {
             let conversionTimeDataToDate = Date(timeIntervalSinceReferenceDate: TimeInterval(forecastData.timeOfData))
