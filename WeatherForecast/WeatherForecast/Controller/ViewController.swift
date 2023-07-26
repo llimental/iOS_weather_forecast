@@ -31,6 +31,8 @@ class ViewController: UIViewController {
 
         viewConfiguration()
         setUpCollectionView()
+
+        bindProperties()
     }
 
     // MARK: - Public function
@@ -58,6 +60,23 @@ class ViewController: UIViewController {
     // MARK: - Private function
     private func setUpLocationManager() {
         locationManager.startUpdatingLocation()
+    // MARK: - Private Functions
+    private func bindProperties() {
+        viewModel.weatherIcon.bind { [weak self] icon in
+            self?.weatherIcon = icon
+        }
+
+        viewModel.address.bind { [weak self] address in
+            self?.location = address
+        }
+
+        viewModel.tempMinAndMax.bind { [weak self] tempMinAndMax in
+            self?.tempMinAndMax = tempMinAndMax
+        }
+
+        viewModel.temperature.bind { [weak self] temperature in
+            self?.temperature = temperature
+        }
     }
 
     private func setUpCollectionView() {
