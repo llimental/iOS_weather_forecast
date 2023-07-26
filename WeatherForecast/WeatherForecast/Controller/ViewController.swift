@@ -146,3 +146,36 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UICollectionViewDataSource
+extension ViewController: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.getForecastListCount()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WeatherCollectionViewHeader.headerIdentifier, for: indexPath) as? WeatherCollectionViewHeader else {
+            return UICollectionReusableView()
+        }
+
+        header.weatherImage.image = weatherIcon
+        header.locationLabel.text = location
+        header.tempMinAndMaxLabel.text = tempMinAndMax
+        header.tempLabel.text = temperature
+        header.settingButton.addTarget(self, action: #selector(settingButtonTapped), for: .touchUpInside)
+
+        return header
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.cellIdentifier, for: indexPath) as? WeatherCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+
+        cell.timeLabel.text = viewModel.getConvertedDate(of: indexPath)
+        cell.temperatureLabel.text = viewModel.getTemperatureData(of: indexPath)
+        cell.tempImage.image = viewModel.getTemperatureImage(of: indexPath)
+
+        return cell
+    }
+}
