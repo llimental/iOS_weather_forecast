@@ -45,15 +45,7 @@ class ViewController: UIViewController {
         }
     }
 
-    // MARK: - Private property
-    private var collectionView = WeatherCollectionView(frame: .zero)
-    
-    private var backgroundView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "weather_wallpaper")
 
-        return imageView
-    }()
 
         
         dateFormatter.dateFormat = "MM/dd(E) HH시"
@@ -106,6 +98,22 @@ class ViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+
+    // MARK: - Private Properties
+    private let viewModel = ViewModel()
+
+    private var collectionView = WeatherCollectionView(frame: .zero)
+    private var backgroundView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "weather_wallpaper")
+
+        return imageView
+    }()
+
+    private var weatherIcon: UIImage?
+    private var location: String?
+    private var tempMinAndMax: String?
+    private var temperature: String?
     }
 
 }
