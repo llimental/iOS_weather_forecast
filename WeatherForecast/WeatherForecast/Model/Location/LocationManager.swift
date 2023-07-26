@@ -12,17 +12,12 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     // MARK: - Private property
     private let locationManager = CLLocationManager()
     private let geoCoder = CLGeocoder()
-    private(set) var address = ""
 
     weak var delegate: LocationManagerDelegate?
 
     // MARK: - Public
     func startUpdatingLocation() {
         setUp()
-    }
-
-    func setAddress(with currentAddress: String) {
-        address = currentAddress
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -65,7 +60,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
 
             if let locality = placemark.locality { reversedAddress += " \(locality)" }
 
-            self.setAddress(with: reversedAddress)
+            self.delegate?.addressData = reversedAddress
         }
     }
 }
