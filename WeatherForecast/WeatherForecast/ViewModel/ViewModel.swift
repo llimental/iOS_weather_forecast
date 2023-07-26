@@ -44,6 +44,10 @@ public class ViewModel {
         return forecast?.list.count ?? 10
     }
 
+    func setUpLocationManager() {
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+    }
     // MARK: - Private Properties
     private var dateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
