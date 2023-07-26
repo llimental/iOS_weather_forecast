@@ -7,24 +7,6 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController {
-    
-    // MARK: - Public property
-    let networkManager = NetworkManager()
-    let locationManager = LocationManager()
-    
-    let dateFormatter = DateFormatter()
-
-    var weather: Weather?
-    var forecast: Forecast?
-    var weatherIcon: UIImage?
-    var forecastIcons: [String: UIImage]? {
-        didSet {
-            if collectionView.refreshControl?.isRefreshing == true {
-                collectionView.refreshControl?.endRefreshing()
-            }
-            collectionView.reloadData()
-        }
 class ViewController: UIViewController, ViewModelDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -38,14 +20,6 @@ class ViewController: UIViewController, ViewModelDelegate {
         viewModel.setUpLocationManager()
     }
 
-    // MARK: - Public function
-    func getGeocodingData(from inputText: String) {
-        Task {
-            if let geocoding = try await networkManager.callGeocodingAPI(with: GeocodingEndPoint(cityName: inputText)).first {
-                locationManager.setAddress(with: "\(geocoding.name)(\(geocoding.country))")
-                fetchData(with: geocoding.lat, and: geocoding.lon)
-            } else {
-                print(NetworkError.invalidCityName.errorDescription)
     // MARK: - Public Functions
     func reloadData() {
         DispatchQueue.main.async {
@@ -64,12 +38,6 @@ class ViewController: UIViewController, ViewModelDelegate {
     @objc func settingButtonTapped() {
         let alert = UIAlertController(title: "위치변경", message: "날씨를 확인하고 싶은 도시 이름을 입력해주세요", preferredStyle: .alert)
 
-        
-        dateFormatter.dateFormat = "MM/dd(E) HH시"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        
-        locationManager.delegate = self
-        setUpLocationManager()
         alert.addTextField { textField in
             textField.placeholder = "ex. 서울 or Seoul"
         }
@@ -85,9 +53,6 @@ class ViewController: UIViewController, ViewModelDelegate {
         self.present(alert, animated: true)
     }
     
-    // MARK: - Private function
-    private func setUpLocationManager() {
-        locationManager.startUpdatingLocation()
     // MARK: - Private Functions
     private func bindProperties() {
         viewModel.weatherIcon.bind { [weak self] icon in
@@ -120,10 +85,6 @@ class ViewController: UIViewController, ViewModelDelegate {
         
         collectionView.refreshControl = UIRefreshControl()
         collectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-    }
-    
-    @objc func refreshData() {
-        locationManager.startUpdatingLocation()
     }
 
     private func viewConfiguration() {
