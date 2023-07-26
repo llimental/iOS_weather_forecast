@@ -25,6 +25,7 @@ class ViewController: UIViewController {
             }
             collectionView.reloadData()
         }
+class ViewController: UIViewController, ViewModelDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,8 @@ class ViewController: UIViewController {
         setUpCollectionView()
 
         bindProperties()
+        viewModel.delegate = self
+        viewModel.setUpLocationManager()
     }
 
     // MARK: - Public function
@@ -43,7 +46,13 @@ class ViewController: UIViewController {
                 fetchData(with: geocoding.lat, and: geocoding.lon)
             } else {
                 print(NetworkError.invalidCityName.errorDescription)
+    // MARK: - Public Functions
+    func reloadData() {
+        DispatchQueue.main.async {
+            if self.collectionView.refreshControl?.isRefreshing == true {
+                self.collectionView.refreshControl?.endRefreshing()
             }
+            self.collectionView.reloadData()
         }
     }
 
