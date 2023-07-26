@@ -8,7 +8,7 @@
 import Foundation
 import UIKit.UIImage
 
-public class ViewModel {
+public class ViewModel: LocationManagerDelegate {
     // MARK: - Public Properties
     let weatherIcon: Box<UIImage?> = Box(nil)
     let forecastIcons: Box<[String: UIImage]?> = Box(nil)
@@ -48,6 +48,25 @@ public class ViewModel {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
+
+    func fetchData(with lat: Double, and lon: Double) {
+        Task {
+            weather = try await networkManager.callWeatherAPI(with: WeatherEndPoint(lat: lat, lon: lon))
+            forecast = try await networkManager.callForecastAPI(with: ForecastEndPoint(lat: lat, lon: lon))
+
+            guard let weatherIconString = weather?.weather.first?.icon else { return }
+            weatherIcon.value = try await networkManager.callWeatherIconAPI(weatherStatus: weatherIconString)
+
+            guard let forecastList = forecast?.list else { return }
+            forecastIcons.value = try await networkManager.callForecastIconAPI(forecastList: forecastList)
+
+            tempMinAndMax.value = "최저 \(String(format: "%.1f", weather?.main.tempMin ?? 0))° 최대 \(String(format: "%.1f", weather?.main.tempMax ?? 0))°"
+            temperature.value = "\(String(format: "%.1f", weather?.main.temp ?? 0))°"
+
+            delegate?.reloadData()
+        }
+    }
+
     // MARK: - Private Properties
     private var dateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
