@@ -37,6 +37,11 @@ public class ViewModel {
 
         return forecastIconData[forecastStatus]
     }
+
+    func getForecastListCount() -> Int {
+        return forecast?.list.count ?? 10
+    }
+
     // MARK: - Private Properties
     private var dateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
