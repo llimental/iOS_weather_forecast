@@ -25,6 +25,12 @@ class ViewController: UIViewController {
             }
             collectionView.reloadData()
         }
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        viewConfiguration()
+        setUpCollectionView()
     }
 
     // MARK: - Public function
@@ -49,16 +55,6 @@ class ViewController: UIViewController {
         return imageView
     }()
 
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.addSubview(backgroundView)
-        backgroundViewConfiguration()
-        
-        view.addSubview(collectionView)
-        setUpCollectionView()
-        collectionViewConfiguration()
         
         dateFormatter.dateFormat = "MM/dd(E) HH시"
         dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -91,26 +87,25 @@ class ViewController: UIViewController {
         locationManager.startUpdatingLocation()
     }
 
-    private func collectionViewConfiguration() {
+    private func viewConfiguration() {
+        view.addSubview(backgroundView)
+        view.addSubview(collectionView)
+
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-    
-    private func backgroundViewConfiguration() {
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
     }
 
 }
