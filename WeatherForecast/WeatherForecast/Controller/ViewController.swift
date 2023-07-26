@@ -56,7 +56,13 @@ class ViewController: UIViewController, ViewModelDelegate {
         }
     }
 
+    // MARK: - Objc Functions
+    @objc func refreshData() {
+        viewModel.setUpLocationManager()
+    }
 
+    @objc func settingButtonTapped() {
+        let alert = UIAlertController(title: "위치변경", message: "날씨를 확인하고 싶은 도시 이름을 입력해주세요", preferredStyle: .alert)
 
         
         dateFormatter.dateFormat = "MM/dd(E) HH시"
@@ -64,6 +70,19 @@ class ViewController: UIViewController, ViewModelDelegate {
         
         locationManager.delegate = self
         setUpLocationManager()
+        alert.addTextField { textField in
+            textField.placeholder = "ex. 서울 or Seoul"
+        }
+
+        alert.addAction(UIAlertAction(title: "변경".localizedLowercase, style: .default, handler: { [unowned alert, weak self] _ in
+            if let inputText = alert.textFields?.first?.text {
+                self?.viewModel.getGeocodingData(from: inputText)
+            }
+        }))
+
+        alert.addAction(UIAlertAction(title: "취소".localizedLowercase, style: .cancel))
+
+        self.present(alert, animated: true)
     }
     
     // MARK: - Private function
