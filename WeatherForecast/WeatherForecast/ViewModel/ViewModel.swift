@@ -16,12 +16,15 @@ public class ViewModel: LocationManagerDelegate {
     let tempMinAndMax = Box("-°, -°")
     let temperature = Box("-°")
 
+    var addressData: String = ""
+
     weak var delegate: ViewModelDelegate?
 
     // MARK: - Public Functions
     func getGeocodingData(from inputText: String) {
         Task {
             if let geocoding = try await networkManager.callGeocodingAPI(with: GeocodingEndPoint(cityName: inputText)).first {
+                addressData = "\(geocoding.name)(\(geocoding.country))"
                 fetchData(with: geocoding.lat, and: geocoding.lon)
             } else {
                 weatherIcon.value = nil
@@ -73,6 +76,7 @@ public class ViewModel: LocationManagerDelegate {
             guard let forecastList = forecast?.list else { return }
             forecastIcons.value = try await networkManager.callForecastIconAPI(forecastList: forecastList)
 
+            address.value = addressData
             tempMinAndMax.value = "최저 \(String(format: "%.1f", weather?.main.tempMin ?? 0))° 최대 \(String(format: "%.1f", weather?.main.tempMax ?? 0))°"
             temperature.value = "\(String(format: "%.1f", weather?.main.temp ?? 0))°"
 
