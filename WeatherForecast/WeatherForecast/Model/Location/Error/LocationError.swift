@@ -9,7 +9,7 @@ import Foundation
 
 enum LocationError: LocalizedError {
     case emptyLocation
-    
+
     var errorDescription: String? {
         switch self {
         case .emptyLocation: return "Location이 없습니다."

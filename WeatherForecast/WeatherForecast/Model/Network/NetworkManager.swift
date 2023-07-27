@@ -9,14 +9,12 @@ import UIKit
 import CoreLocation
 
 final class NetworkManager {
-
-    private let session: URLSession
-
+    // MARK: - LifeCycle
     init() {
         session = URLSession(configuration: .default)
     }
-    
-    // MARK: - Public
+
+    // MARK: - Public Functions
     func callWeatherAPI<D: Decodable, R: RequestAndResponse>(with endPoint: R) async throws -> D where R.Response == D {
         let weatherURLRequest = try endPoint.makeURLRequest()
 
@@ -80,11 +78,14 @@ final class NetworkManager {
         return imageSet
     }
 
-    // MARK: - Private
+    // MARK: - Private Functions
     private func getURL(string: String) throws -> URL {
         guard let weatherURL = URL(string: string) else {
             throw NetworkError.invalidURL
         }
         return weatherURL
     }
+
+    // MARK: - Private Properties
+    private let session: URLSession
 }
