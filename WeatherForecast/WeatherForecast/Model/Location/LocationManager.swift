@@ -9,27 +9,7 @@ import Foundation
 import CoreLocation
 
 final class LocationManager: NSObject, CLLocationManagerDelegate {
-    // MARK: - Private property
-    private let locationManager = CLLocationManager()
-    private let geoCoder = CLGeocoder()
-
-    weak var delegate: LocationManagerDelegate?
-
-    // MARK: - Public
-    func startUpdatingLocation() {
-        setUp()
-    }
-
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            manager.requestLocation()
-        default:
-            manager.requestWhenInUseAuthorization()
-        }
-    }
-    
-    // MARK: - Lifecycle
+    // MARK: - CLLocationManager Functions
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             print(LocationError.emptyLocation.localizedDescription)
@@ -43,8 +23,22 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
-    
-    // MARK: - Private
+
+    // MARK: - Public Functions
+    func startUpdatingLocation() {
+        setUp()
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.requestLocation()
+        default:
+            manager.requestWhenInUseAuthorization()
+        }
+    }
+
+    // MARK: - Private Functions
     private func setUp() {
         locationManager.delegate = self
         locationManager.requestLocation()
@@ -63,4 +57,10 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
             self.delegate?.addressData = reversedAddress
         }
     }
+
+    // MARK: - Private properties
+    private let locationManager = CLLocationManager()
+    private let geoCoder = CLGeocoder()
+
+    weak var delegate: LocationManagerDelegate?
 }
