@@ -14,7 +14,7 @@ enum NetworkError: LocalizedError {
     case apiResource
     case apiKey
     case decodeError
-    
+
     var errorDescription: String {
         switch self {
         case .invalidURL: return "invalid URL"

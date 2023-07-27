@@ -8,21 +8,8 @@
 import UIKit
 
 class WeatherCollectionViewHeader: UICollectionReusableView {
-
-    // MARK: - Static property
-    static let headerIdentifier = "WeatherCollectionViewHeader"
-
-    // MARK: - Public property
-    var weatherImage = UIImageView()
-    var informationStack = UIStackView()
-    var locationLabel = UILabel()
-    var tempMinAndMaxLabel = UILabel()
-    var tempLabel = UILabel()
-    var settingButton = UIButton()
-
     // MARK: - Lifecycle
     override init(frame: CGRect) {
-
         super.init(frame: frame)
 
         addSubview(weatherImage)
@@ -41,7 +28,18 @@ class WeatherCollectionViewHeader: UICollectionReusableView {
         super.init(coder: coder)
     }
 
-    // MARK: - Private function
+    // MARK: - Static Properties
+    static let headerIdentifier = "WeatherCollectionViewHeader"
+
+    // MARK: - Public Properties
+    var weatherImage = UIImageView()
+    var informationStack = UIStackView()
+    var locationLabel = UILabel()
+    var tempMinAndMaxLabel = UILabel()
+    var tempLabel = UILabel()
+    var settingButton = UIButton()
+
+    // MARK: - Private Functions
     private func configureUI() {
         weatherImage.contentMode = .scaleAspectFit
 
