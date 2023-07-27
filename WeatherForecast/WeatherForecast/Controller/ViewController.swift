@@ -52,7 +52,7 @@ class ViewController: UIViewController, ViewModelDelegate {
 
         self.present(alert, animated: true)
     }
-    
+
     // MARK: - Private Functions
     private func bindProperties() {
         viewModel.weatherIcon.bind { [weak self] icon in
@@ -76,13 +76,13 @@ class ViewController: UIViewController, ViewModelDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .clear
-        
+
         collectionView.register(WeatherCollectionViewHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: WeatherCollectionViewHeader.headerIdentifier)
         collectionView.register(WeatherCollectionViewCell.self,
                                 forCellWithReuseIdentifier: WeatherCollectionViewCell.cellIdentifier)
-        
+
         collectionView.refreshControl = UIRefreshControl()
         collectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
     }
@@ -137,7 +137,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UICollectionViewDataSource
 extension ViewController: UICollectionViewDataSource {
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.getForecastListCount()
     }
