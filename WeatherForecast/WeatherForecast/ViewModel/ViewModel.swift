@@ -23,7 +23,7 @@ public class ViewModel: LocationManagerDelegate {
     // MARK: - Public Functions
     func getGeocodingData(from inputText: String) {
         Task {
-            if let geocoding = try await networkManager.callGeocodingAPI(with: GeocodingEndPoint(cityName: inputText)).first {
+            if let geocoding = try await networkManager.callAPI(with: GeocodingEndPoint(cityName: inputText)).first {
                 addressData = "\(geocoding.name)(\(geocoding.country))"
                 fetchData(with: geocoding.lat, and: geocoding.lon)
             } else {
@@ -67,8 +67,8 @@ public class ViewModel: LocationManagerDelegate {
 
     func fetchData(with lat: Double, and lon: Double) {
         Task {
-            weather = try await networkManager.callWeatherAPI(with: WeatherEndPoint(lat: lat, lon: lon))
-            forecast = try await networkManager.callForecastAPI(with: ForecastEndPoint(lat: lat, lon: lon))
+            weather = try await networkManager.callAPI(with: WeatherEndPoint(lat: lat, lon: lon))
+            forecast = try await networkManager.callAPI(with: ForecastEndPoint(lat: lat, lon: lon))
 
             guard let weatherIconString = weather?.weather.first?.icon else { return }
             weatherIcon.value = try await networkManager.callWeatherIconAPI(weatherStatus: weatherIconString)

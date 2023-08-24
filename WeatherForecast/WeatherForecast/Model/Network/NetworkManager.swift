@@ -15,34 +15,13 @@ final class NetworkManager {
     }
 
     // MARK: - Public Functions
-    func callWeatherAPI<D: Decodable, R: RequestAndResponse>(with endPoint: R) async throws -> D where R.Response == D {
-        let weatherURLRequest = try endPoint.makeURLRequest()
+    func callAPI<D: Decodable, R: RequestAndResponse>(with endPoint: R) async throws -> D where R.Response == D {
+        let urlRequest = try endPoint.makeURLRequest()
 
-        let (data, _) = try await session.data(for: weatherURLRequest)
+        let (data, _) = try await session.data(for: urlRequest)
         let weather: D = try JSONDecoder().decode(D.self, from: data)
 
-        print("[NetworkManager](fetched)weather")
         return weather
-    }
-
-    func callForecastAPI<D: Decodable, R: RequestAndResponse>(with endPoint: R) async throws -> D where R.Response == D {
-        let forecastURLRequest = try endPoint.makeURLRequest()
-        
-        let (data, _) = try await session.data(for: forecastURLRequest)
-        let forecast = try JSONDecoder().decode(D.self, from: data)
-
-        print("[NetworkManager](fetched)forecast")
-        return forecast
-    }
-
-    func callGeocodingAPI<D: Decodable, R: RequestAndResponse>(with endPoint: R) async throws -> D where R.Response == D {
-        let geocodingURLRequest = try endPoint.makeURLRequest()
-
-        let (data, _) = try await session.data(for: geocodingURLRequest)
-        let geocoding = try JSONDecoder().decode(D.self, from: data)
-
-        print("[NetworkManager](fetched)geocoding")
-        return geocoding
     }
 
     func callWeatherIconAPI(weatherStatus: String) async throws -> UIImage? {
